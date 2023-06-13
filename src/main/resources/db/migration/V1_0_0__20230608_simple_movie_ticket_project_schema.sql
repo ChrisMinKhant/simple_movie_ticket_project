@@ -1,12 +1,22 @@
 -- Create users Table --
 CREATE TABLE IF NOT EXISTS users(
-    id int NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,
     age varchar(3) NOT NULL,
     phone varchar(20) NOT NULL,
     email varchar(255) NOT NULL,
+    password varchar(255) NOT NULL,
+    enabled boolean DEFAULT true,
     address varchar(255) NOT NULL,
-    PRIMARY KEY(id)
+    PRIMARY KEY(email)
+);
+
+-- Create roles table --
+CREATE TABLE IF NOT EXISTS roles(
+    id int NOT NULL AUTO_INCREMENT,
+    email varchar(255) NOT NULL,
+    role varchar(255) NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT FK_user_email FOREIGN KEY(email) REFERENCES users(email)
 );
 
 -- Create movies Table --

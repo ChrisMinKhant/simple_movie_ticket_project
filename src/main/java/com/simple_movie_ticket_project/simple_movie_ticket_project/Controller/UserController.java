@@ -3,6 +3,7 @@ package com.simple_movie_ticket_project.simple_movie_ticket_project.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.simple_movie_ticket_project.simple_movie_ticket_project.DTO.RequestDTO.UserCreateRequestDTO;
+import com.simple_movie_ticket_project.simple_movie_ticket_project.DTO.RequestDTO.UserUpdateRequestDTO;
+import com.simple_movie_ticket_project.simple_movie_ticket_project.DTO.ResponseDTO.UserResponseDTO;
 import com.simple_movie_ticket_project.simple_movie_ticket_project.Service.Interfaces.UserServiceInterface;
 import com.simple_movie_ticket_project.simple_movie_ticket_project.entity.User;
 
@@ -23,6 +27,7 @@ public class UserController {
     private UserServiceInterface userService;
 
     // Counstructor Injection.
+    @Autowired
     UserController(UserServiceInterface userService) {
         this.userService = userService;
     }
@@ -30,25 +35,25 @@ public class UserController {
     // Method for GET::"/users" endpoint.
     // get all the users from the users table.
     @GetMapping("/users")
-    public List<User> getAllUsers() {
+    public List<UserResponseDTO> getAllUsers() {
 
-        // Create empty User List object.
-        List<User> user = new ArrayList<User>();
+        // Create empty UserResponseDTO List object.
+        List<UserResponseDTO> user = new ArrayList<UserResponseDTO>();
 
         user = userService.findAll();
 
         return user;
     }
 
-    // Method for GET::"/users" endpoint.
+    // Method for GET::"/users/{email}" endpoint.
     // get one specific user from the users table.
-    @GetMapping("/users/{id}")
-    public User getUserById(@PathVariable int id) {
+    @GetMapping("/users/{email}")
+    public UserResponseDTO getUserByEmail(@PathVariable String email) {
 
-        // Create empty User object.
-        User user = new User();
+        // Create empty UserResponseDTO object.
+        UserResponseDTO user = new UserResponseDTO();
 
-        user = userService.findById(id);
+        user = userService.findByEmail(email);
 
         return user;
     }
@@ -56,7 +61,7 @@ public class UserController {
     // Method for POST::"/users" endpoint.
     // save new user to the users table.
     @PostMapping("/users")
-    public void saveNewUser(@RequestBody User user) {
+    public void saveNewUser(@RequestBody UserCreateRequestDTO user) {
 
         userService.save(user);
 
@@ -65,18 +70,18 @@ public class UserController {
     // Method for PUT::"/users" endpoint.
     // update existing user to the users table.
     @PutMapping("/users")
-    public void updateUser(@RequestBody User user) {
+    public void updateUser(@RequestBody UserUpdateRequestDTO user) {
 
-        userService.save(user);
+        userService.update(user);
 
     }
 
-    // Method for DELETE::"/users/{id}" endpoint.
+    // Method for DELETE::"/users/{email}" endpoint.
     // delete existing user to the users table.
-    @DeleteMapping("/users/{id}")
-    public void deleteUSer(@PathVariable int id) {
+    @DeleteMapping("/users/{email}")
+    public void deleteUSer(@PathVariable String email) {
 
-        userService.delete(id);
+        userService.delete(email);
 
     }
 }
