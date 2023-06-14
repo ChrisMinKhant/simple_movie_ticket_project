@@ -72,10 +72,10 @@ public class TicketController {
     /*
      * Method for PUT:"/tickets" end point.
      */
-    @PutMapping("/tickets")
-    public void updateTicket(@RequestBody TicketRequestDTO ticketRequestDTO) {
+    @PutMapping("/tickets/{id}")
+    public void updateTicket(@RequestBody TicketRequestDTO ticketRequestDTO, @PathVariable int id) {
 
-        ticketService.saveTicket(ticketRequestDTO);
+        ticketService.updateTicket(ticketRequestDTO, id);
 
     }
 

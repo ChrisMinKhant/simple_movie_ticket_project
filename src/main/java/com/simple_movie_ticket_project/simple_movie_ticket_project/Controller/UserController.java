@@ -17,7 +17,6 @@ import com.simple_movie_ticket_project.simple_movie_ticket_project.DTO.RequestDT
 import com.simple_movie_ticket_project.simple_movie_ticket_project.DTO.RequestDTO.UserUpdateRequestDTO;
 import com.simple_movie_ticket_project.simple_movie_ticket_project.DTO.ResponseDTO.UserResponseDTO;
 import com.simple_movie_ticket_project.simple_movie_ticket_project.Service.Interfaces.UserServiceInterface;
-import com.simple_movie_ticket_project.simple_movie_ticket_project.entity.User;
 
 @RestController
 @RequestMapping("/api")

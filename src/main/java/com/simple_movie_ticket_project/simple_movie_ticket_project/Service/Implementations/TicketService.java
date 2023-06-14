@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.simple_movie_ticket_project.simple_movie_ticket_project.DTO.RequestDTO.TicketRequestDTO;
+import com.simple_movie_ticket_project.simple_movie_ticket_project.DTO.RequestDTO.TicketUpdateRequestDTO;
 import com.simple_movie_ticket_project.simple_movie_ticket_project.DTO.ResponseDTO.TicketResponseDTO;
 import com.simple_movie_ticket_project.simple_movie_ticket_project.JPA.TicketRepository;
 import com.simple_movie_ticket_project.simple_movie_ticket_project.Service.Interfaces.MovieServiceInterface;
@@ -113,6 +114,23 @@ public class TicketService implements TicketServiceInterface {
         // Call requestedTicketFromDto method to get Ticket object with
         // associate data.
         ticket = this.requestedTicketFromDto(ticketRequestDTO);
+
+        // Persist it to the database.
+        ticketRepo.save(ticket);
+    }
+
+    // Update existing ticket.
+    public void updateTicket(TicketRequestDTO ticketUpdateRequestDTO, int id) {
+
+        // Create empty Ticket object.
+        Ticket ticket = new Ticket();
+
+        // Call requestedTicketFromDto method to get Ticket object with
+        // associate data.
+        ticket = this.requestedTicketFromDto(ticketUpdateRequestDTO);
+
+        // Set id of the existing record.
+        ticket.setId(id);
 
         // Persist it to the database.
         ticketRepo.save(ticket);

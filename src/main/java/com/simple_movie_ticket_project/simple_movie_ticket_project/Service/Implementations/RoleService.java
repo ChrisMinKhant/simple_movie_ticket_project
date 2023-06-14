@@ -57,7 +57,7 @@ public class RoleService implements RoleServiceInterface {
 
     // Create new role.
     @Override
-    public void save(RoleRequestDTO roleRequestDTO) {
+    public String save(RoleRequestDTO roleRequestDTO) {
 
         // Create empty User and Role object.
         User user = new User();
@@ -68,21 +68,40 @@ public class RoleService implements RoleServiceInterface {
                 .setParameter("email", roleRequestDTO.getUserEmail())
                 .getSingleResult();
 
+        List<Role> roleList = new ArrayList<Role>();
+
+        roleList = user.getRoles();
+
+        for (Role temporaryRole : roleList) {
+            if (temporaryRole.getRole().equals(roleRequestDTO.getRole())) {
+                return user.getEmail() + " already have this role.";
+            }
+        }
+
         // Set role with necessary data.
         role.setUser(user);
         role.setRole(roleRequestDTO.getRole());
 
         // Persist the role.
         roleRepo.save(role);
+
+        return "You create new role for " + user.getEmail();
     }
 
     // Delete role data.
     @Override
-    public void delete(int id) {
+    public void delete(String email) {
+
+        // Create empty Role and User object.
+        Role role = new Role();
+        User user = new User();
+
+        user = (User) entityManager.createQuery("FROM User WHERE email LIKE :email")
+                .setParameter("email", email).getSingleResult();
 
         // Create a query to get specific role record and type cast it to Role.
-        Role role = (Role) entityManager.createQuery("FROM Role WHERE id LIKE :id")
-                .setParameter("id", id).getSingleResult();
+        role = (Role) entityManager.createQuery("FROM Role WHERE user LIKE :user")
+                .setParameter("user", user).getSingleResult();
 
         // Delete specific role record.
         roleRepo.delete(role);

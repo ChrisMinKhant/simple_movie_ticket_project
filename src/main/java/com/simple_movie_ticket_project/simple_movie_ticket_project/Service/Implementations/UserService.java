@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.simple_movie_ticket_project.simple_movie_ticket_project.DTO.RequestDTO.UserCreateRequestDTO;
@@ -61,20 +62,23 @@ public class UserService implements UserServiceInterface {
     // Find user by email.
     @Override
     public UserResponseDTO findByEmail(String email) {
-        // Create empty User Object.
+        // Create empty User and UserResponseDTO Object.
         User user = new User();
         UserResponseDTO userResponseDTO = new UserResponseDTO();
 
+        // Retrive user record by its' email.
         user = (User) entityManager.createQuery("FROM User WHERE email LIKE :email")
                 .setParameter("email", email)
                 .getSingleResult();
 
+        // Set user necessary user data to UserResponseDTO by using setter method.
         userResponseDTO.setName(user.getName());
         userResponseDTO.setAge(user.getAge());
         userResponseDTO.setPhone(user.getPhone());
         userResponseDTO.setEmail(user.getEmail());
         userResponseDTO.setAddress(user.getAddress());
 
+        // Return UserResponseDTO.
         return userResponseDTO;
     }
 
@@ -82,37 +86,47 @@ public class UserService implements UserServiceInterface {
     @Override
     public void save(UserCreateRequestDTO userCreateRequestDTO) {
 
+        // Create empty Role and User object.
         Role role = new Role();
         User user = new User();
 
+        // Set User data from New UserCreateRequestDTO through setter method.
         user.setName(userCreateRequestDTO.getName());
         user.setAge(userCreateRequestDTO.getAge());
         user.setPhone(userCreateRequestDTO.getPhone());
         user.setEmail(userCreateRequestDTO.getEmail());
-        user.setPassword(userCreateRequestDTO.getPassword());
+        user.setPassword("{noop}" + userCreateRequestDTO.getPassword());
         user.setAddress(userCreateRequestDTO.getAddress());
 
+        // Persist the User.
         userRepo.save(user);
 
+        // Set the associate role for the user.
         role.setUser(user);
-        role.setRole(userCreateRequestDTO.getRole());
+        role.setRole("ROLE_NORMALUSER");
 
+        // Persist the role.
         roleRepo.save(role);
     }
 
     // Update existing user record.
     @Override
     public void update(UserUpdateRequestDTO userUpdateRequestDTO) {
+
+        // Create empty User object.
         User user = new User();
 
+        // Retrive user record by its' email.
         user = (User) entityManager.createQuery("FROM User WHERE email LIKE :email")
                 .setParameter("email", userUpdateRequestDTO.getEmail()).getSingleResult();
 
+        // Set new User data from UserUpdateRequestDTO through User's setter method.
         user.setName(userUpdateRequestDTO.getName());
         user.setAge(userUpdateRequestDTO.getAge());
         user.setPhone(userUpdateRequestDTO.getPhone());
         user.setAddress(userUpdateRequestDTO.getAddress());
 
+        // Persist the User.
         userRepo.save(user);
     }
 

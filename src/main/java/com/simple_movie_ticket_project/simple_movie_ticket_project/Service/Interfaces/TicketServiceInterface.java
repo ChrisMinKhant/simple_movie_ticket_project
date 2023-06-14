@@ -16,8 +16,11 @@ public interface TicketServiceInterface {
     // Find record by its id.
     TicketResponseDTO findById(int id);
 
-    // Save or update new ticket.
+    // Save new ticket.
     void saveTicket(TicketRequestDTO ticketRequestDTO);
+
+    // Update existing ticket.
+    void updateTicket(TicketRequestDTO ticketRequestDTO, int id);
 
     // Delete record.
     void delete(int id);

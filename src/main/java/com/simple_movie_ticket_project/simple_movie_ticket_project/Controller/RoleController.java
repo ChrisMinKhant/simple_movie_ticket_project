@@ -60,27 +60,18 @@ public class RoleController {
     // Method for POST::"/roles" endpoint.
     // save new role to the roles table.
     @PostMapping("/roles")
-    public void saveNewUser(@RequestBody RoleRequestDTO roleRequestDTO) {
+    public String saveNewRole(@RequestBody RoleRequestDTO roleRequestDTO) {
 
-        roleService.save(roleRequestDTO);
-
-    }
-
-    // Method for PUT::"/roles" endpoint.
-    // update existing role to the roles table.
-    @PutMapping("/roles")
-    public void updateUser(@RequestBody RoleRequestDTO roleRequestDTO) {
-
-        roleService.save(roleRequestDTO);
+        return roleService.save(roleRequestDTO);
 
     }
 
-    // Method for DELETE::"/roles/{id}" endpoint.
+    // Method for DELETE::"/roles/{email}" endpoint.
     // delete existing role to the roles table.
-    @DeleteMapping("/roles/{id}")
-    public void deleteRole(@PathVariable int id) {
+    @DeleteMapping("/roles/{email}")
+    public void deleteRole(@PathVariable String email) {
 
-        roleService.delete(id);
+        roleService.delete(email);
 
     }
 }

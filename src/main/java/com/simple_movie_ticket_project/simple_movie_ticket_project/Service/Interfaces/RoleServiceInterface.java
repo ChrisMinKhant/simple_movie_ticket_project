@@ -13,8 +13,8 @@ public interface RoleServiceInterface {
     Role findById(int id);
 
     // Create or Update record to moves table.
-    void save(RoleRequestDTO roleDto);
+    String save(RoleRequestDTO roleDto);
 
     // Delete one record from moview table.
-    void delete(int id);
+    void delete(String email);
 }
