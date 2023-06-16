@@ -1,0 +1,8 @@
+id,email,role
+1,"kaungminkhant@gmail.com","ROLE_NORMALUSER"
+2,"kaungminkhant@gmail.com","ROLE_ADMINUSER"
+3,"kaungminkhant@gmail.com","ROLE_MANAGABLEUSER"
+4,"sumyathtun@gmail.com","ROLE_NORMALUSER"
+5,"sumyathtun@gmail.com","ROLE_ADMINUSER"
+6,"kaungkaung@gmail.com","ROLE_NORMALUSER"
+7,"susu@gmail.com","ROLE_NORMALUSER"

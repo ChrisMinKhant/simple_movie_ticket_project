@@ -66,3 +66,59 @@ CREATE TABLE IF NOT EXISTS tickets(
     CONSTRAINT FK_show_times_id FOREIGN KEY(show_times_id) REFERENCES show_times(id),
     CONSTRAINT FK_prices_id FOREIGN KEY(prices_id) REFERENCES prices(id)
 );
+
+-- Import user CSV into database -- 
+LOAD DATA INFILE 'D:/Spring_Tests/simple_movie_ticket_project/src/main/resources/db/migration/csv/users.csv' 
+INTO TABLE users 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+
+-- Import role CSV into database -- 
+LOAD DATA INFILE 'D:/Spring_Tests/simple_movie_ticket_project/src/main/resources/db/migration/csv/roles.csv' 
+INTO TABLE roles 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+
+-- Import movie CSV into database -- 
+LOAD DATA INFILE 'D:/Spring_Tests/simple_movie_ticket_project/src/main/resources/db/migration/csv/movies.csv' 
+INTO TABLE movies 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+
+-- Import theater CSV into database -- 
+LOAD DATA INFILE 'D:/Spring_Tests/simple_movie_ticket_project/src/main/resources/db/migration/csv/theaters.csv' 
+INTO TABLE theaters 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+
+-- Import price CSV into database -- 
+LOAD DATA INFILE 'D:/Spring_Tests/simple_movie_ticket_project/src/main/resources/db/migration/csv/prices.csv' 
+INTO TABLE prices 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+
+-- Import show_time CSV into database -- 
+LOAD DATA INFILE 'D:/Spring_Tests/simple_movie_ticket_project/src/main/resources/db/migration/csv/show_times.csv' 
+INTO TABLE show_times 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;
+
+-- Import ticket CSV into database -- 
+LOAD DATA INFILE 'D:/Spring_Tests/simple_movie_ticket_project/src/main/resources/db/migration/csv/tickets.csv' 
+INTO TABLE tickets 
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 ROWS;

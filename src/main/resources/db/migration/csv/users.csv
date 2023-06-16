@@ -1,0 +1,5 @@
+name,age,phone,email,password,enabled,address
+"Kaung Min Khant","21","+959790383481","kaungminkhant@gmail.com","{noop}test123",1,"South Okkalapa"
+"Su Myat Htun","24","+9799793920","sumyathtun@gmail.com","{noop}test123",1,"Insein"
+"Kaung Kaung","22","+959253292256","kaungkaung@gmail.com","{noop}test123",1,"Mawlamyine"
+"Su Su","23","+959259979383","susu@gmail.com","{noop}test123",1,"South Insein"
